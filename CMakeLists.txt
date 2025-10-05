@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.0)
 project(mprpc)
 
-# gdb调试
+# 生成debug版本 可进行gdb调试
 set(CMAKE_BUILD_TYPE "Debug")
 
 # 可执行文件输出路径    
@@ -9,11 +9,11 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 # 库文件输出路径
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
-# protobuf安装路径
+# protobuf安装路径，默认路径找不动，需手动指定
 include_directories(/usr/local/include)
 link_directories(/usr/local/lib)
 
-# 编译头文件搜索路径 -I
+# 编译头文件搜索路径 -I（全局暴露，便于直接 #include <...>）
 include_directories(${PROJECT_SOURCE_DIR}/src/include)
 include_directories(${PROJECT_SOURCE_DIR}/example)
 # 编译库文件搜索路径 -L
