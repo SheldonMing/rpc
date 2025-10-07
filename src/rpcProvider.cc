@@ -109,7 +109,7 @@ void RpcProvider::OnMessage(const muduo::net::TcpConnectionPtr &conn,
     std::string args_str = recv_buf.substr(4 + header_size, args_size);
 
     // 打印调试信息
-    std::cout << "========================================" << std::endl;
+    std::cout << "=============provider===================" << std::endl;
     std::cout << "header_size: " << header_size << std::endl;
     std::cout << "service_name: " << service_name << std::endl;
     std::cout << "method_name: " << method_name << std::endl;

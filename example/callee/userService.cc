@@ -15,6 +15,13 @@ public:
         return true;
     }
 
+    bool Register(uint32_t id, std::string name, std::string pwd)
+    {
+        std::cout << "doing local service: Register" << std::endl;
+        std::cout << "id: " << id << " name: " << name << " pwd: " << pwd << std::endl;
+        return true;
+    }
+
     /**
      * 重写基类的虚函数 下面的Login方法是框架直接调用的
      * 1. caller ==> Login(LoginRequest) ==> muduo ==> callee
@@ -30,11 +37,29 @@ public:
 
         bool login_result = Login(name, pwd);
 
-        RPC::ResultCode *code = new RPC::ResultCode();
+        RPC::ResultCode *code = response->mutable_result();
         code->set_errcode(0);
-        code->set_errmsg("");
-        response->set_allocated_result(code);
+        code->set_errmsg("success");
         response->set_sucess(login_result);
+
+        done->Run();
+    }
+
+    void Register(::google::protobuf::RpcController *controller,
+                  const ::RPC::RegisterRequest *request,
+                  ::RPC::RegisterResponse *response,
+                  ::google::protobuf::Closure *done) override
+    {
+        uint32_t id = request->id();
+        std::string name = request->name();
+        std::string pwd = request->pwd();
+
+        bool ret = Register(id, name, pwd);
+
+        RPC::ResultCode *code = response->mutable_result();
+        code->set_errcode(0);
+        code->set_errmsg("success");
+        response->set_sucess(ret);
 
         done->Run();
     }
