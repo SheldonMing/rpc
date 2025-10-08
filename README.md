@@ -41,3 +41,7 @@ cd build
 cmake ..
 make
 ```
+
+其他：
+zookeeper-3.4.10
+jdk1.8.0_192
